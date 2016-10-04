@@ -9,13 +9,13 @@ whatever I want to write
 
 */
 
-float currentRectShowing = 1;
+float currentRectangles = 1;
 float rectangles [];
 float size = 15;
 
 PVector[] CurrentPosition = new PVector [20];
 PVector[] rectanglePosition = new PVector [20];
-PVector distanceBehind;
+PVector[] distanceBehind = new PVector [20];
 PVector circlePosition;
 
 boolean x1 = false;
@@ -28,67 +28,78 @@ void setup ()
 {
   size(700,700);
   
-  for(int i = 0; i < 20; i++)
+  for(int i = 0; i < currentRectangles; i++)
   {
     rectanglePosition [i] = new PVector (350,350);
     rectanglePosition[i].x = 350;
     rectanglePosition[i].y = 350;
     CurrentPosition [i] = new PVector (350,350);
-    distanceBehind = new PVector (15,0);
+    distanceBehind [0] = new PVector (15,0);
+    distanceBehind [1] = new PVector (30,0);
+    distanceBehind [2] = new PVector (45,0);
+    distanceBehind [3] = new PVector (60,0);
+    distanceBehind [4] = new PVector (75,0);
+    distanceBehind [5] = new PVector (90,0);
+    distanceBehind [6] = new PVector (105,0);
+    distanceBehind [7] = new PVector (120,0);
+    distanceBehind [8] = new PVector (135,0);
+    distanceBehind [9] = new PVector (150,0);
+    distanceBehind [10] = new PVector (165,0);
+    distanceBehind [11] = new PVector (180,0);
+    distanceBehind [12] = new PVector (195,0);
+    distanceBehind [13] = new PVector (210,0);
+    distanceBehind [14] = new PVector (225,0);
+    distanceBehind [15] = new PVector (240,0);
+    distanceBehind [16] = new PVector (255,0);
+    distanceBehind [17] = new PVector (270,0);
+    distanceBehind [18] = new PVector (285,0);
+    distanceBehind [19] = new PVector (300,0);
     circlePosition = new PVector (random(width), random(height));
   }
-
-  rectanglePosition[1] = rectanglePosition[1].sub(distanceBehind);
-
-/*  
-  rectanglePosition [0] = new PVector (350,350);
-
-  rectanglePosition [1] = CurrentPosition [0];
-  rectanglePosition [2] = CurrentPosition [1];
-  rectanglePosition [3] = CurrentPosition [2];
-  rectanglePosition [4] = CurrentPosition [3];
-  rectanglePosition [5] = CurrentPosition [4];
-  rectanglePosition [6] = CurrentPosition [5];
-  rectanglePosition [7] = CurrentPosition [6];  
-  rectanglePosition [8] = CurrentPosition [7];
-  rectanglePosition [9] = CurrentPosition [8];
-  rectanglePosition [10] = CurrentPosition [9];
-  rectanglePosition [11] = CurrentPosition [10]; 
-  rectanglePosition [12] = CurrentPosition [11];
-  rectanglePosition [13] = CurrentPosition [12];
-  rectanglePosition [14] = CurrentPosition [13];
-  rectanglePosition [15] = CurrentPosition [14];
-  rectanglePosition [16] = CurrentPosition [15];
-  rectanglePosition [17] = CurrentPosition [16];
-  rectanglePosition [18] = CurrentPosition [17];
-  rectanglePosition [19] = CurrentPosition [18];
   
-  CurrentPosition [0] = rectanglePosition [0];
-  CurrentPosition [1] = rectanglePosition [1];
-  CurrentPosition [2] = rectanglePosition [2];
-  CurrentPosition [3] = rectanglePosition [3];
-  CurrentPosition [4] = rectanglePosition [4];
-  CurrentPosition [5] = rectanglePosition [5];
-  CurrentPosition [6] = rectanglePosition [6];
-  CurrentPosition [7] = rectanglePosition [7];
-  CurrentPosition [8] = rectanglePosition [8];
-  CurrentPosition [9] = rectanglePosition [9];
-  CurrentPosition [10] = rectanglePosition [10];
-  CurrentPosition [11] = rectanglePosition [11];
-  CurrentPosition [12] = rectanglePosition [12];
-  CurrentPosition [13] = rectanglePosition [13];
-  CurrentPosition [14] = rectanglePosition [14];
-  CurrentPosition [15] = rectanglePosition [15];
-  CurrentPosition [16] = rectanglePosition [16];
-  CurrentPosition [17] = rectanglePosition [17];
-  CurrentPosition [18] = rectanglePosition [18];
-  CurrentPosition [19] = rectanglePosition [19];
-*/
+  rectanglePosition[1] = new PVector (350,350);
+  rectanglePosition[2] = new PVector (350,350);
+  rectanglePosition[3] = new PVector (350,350);
+  rectanglePosition[4] = new PVector (350,350);
+  rectanglePosition[5] = new PVector (350,350);
+  rectanglePosition[6] = new PVector (350,350);
+  rectanglePosition[7] = new PVector (350,350);
+  rectanglePosition[8] = new PVector (350,350);
+  rectanglePosition[9] = new PVector (350,350);
+  rectanglePosition[10] = new PVector (350,350);
+  rectanglePosition[11] = new PVector (350,350);
+  rectanglePosition[12] = new PVector (350,350);
+  rectanglePosition[13] = new PVector (350,350);
+  rectanglePosition[14] = new PVector (350,350);
+  rectanglePosition[15] = new PVector (350,350);
+  rectanglePosition[16] = new PVector (350,350);
+  rectanglePosition[17] = new PVector (350,350);
+  rectanglePosition[18] = new PVector (350,350);
+  rectanglePosition[19] = new PVector (350,350);
+  rectanglePosition[1] = rectanglePosition[1].sub(distanceBehind[0]);
+  rectanglePosition[2] = rectanglePosition[2].sub(distanceBehind[1]);
+  rectanglePosition[3] = rectanglePosition[3].sub(distanceBehind[2]);
+  rectanglePosition[4] = rectanglePosition[4].sub(distanceBehind[3]);
+  rectanglePosition[5] = rectanglePosition[5].sub(distanceBehind[4]);
+  rectanglePosition[6] = rectanglePosition[6].sub(distanceBehind[5]);
+  rectanglePosition[7] = rectanglePosition[7].sub(distanceBehind[6]);
+  rectanglePosition[8] = rectanglePosition[8].sub(distanceBehind[7]);
+  rectanglePosition[9] = rectanglePosition[9].sub(distanceBehind[8]);
+  rectanglePosition[10] = rectanglePosition[10].sub(distanceBehind[9]);
+  rectanglePosition[11] = rectanglePosition[11].sub(distanceBehind[10]);
+  rectanglePosition[12] = rectanglePosition[12].sub(distanceBehind[11]);
+  rectanglePosition[13] = rectanglePosition[13].sub(distanceBehind[12]);
+  rectanglePosition[14] = rectanglePosition[14].sub(distanceBehind[13]);
+  rectanglePosition[15] = rectanglePosition[15].sub(distanceBehind[14]);
+  rectanglePosition[16] = rectanglePosition[16].sub(distanceBehind[15]);
+  rectanglePosition[17] = rectanglePosition[17].sub(distanceBehind[16]);
+  rectanglePosition[18] = rectanglePosition[18].sub(distanceBehind[17]);
+  rectanglePosition[19] = rectanglePosition[19].sub(distanceBehind[18]);
 }
 
 void draw()
 {    
-  for(int i=0; i<20; i++)
+  for(int i=0; i<currentRectangles; i++)
   {
     Boundaries ();
     if(x1 == true)
@@ -114,7 +125,7 @@ void draw()
   background(0);
   fill(255);
   
-  for(int i = 0; i<20; i++)
+  for(int i = 0; i<currentRectangles; i++)
   {
     rect(rectanglePosition[i].x, rectanglePosition[i].y, size, size);
   }
@@ -164,12 +175,13 @@ void draw()
   {
     circlePosition.x = random(width);
     circlePosition.y = random(height);
+    currentRectangles++;
   }
 }
 
 void Boundaries ()
 {
-  for(int i = 0; i<20; i++)
+  for(int i = 0; i < currentRectangles; i++)
   {
     if(rectanglePosition[i].x > width)
     {

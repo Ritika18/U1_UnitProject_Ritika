@@ -15,6 +15,8 @@ float size = 15;
 
 PVector[] CurrentPosition = new PVector [20];
 PVector[] rectanglePosition = new PVector [20];
+PVector distanceBehind;
+PVector circlePosition;
 
 boolean x1 = false;
 boolean x2 = false;
@@ -25,7 +27,6 @@ boolean y2 = false;
 void setup ()
 {
   size(700,700);
-   
   
   for(int i = 0; i < 20; i++)
   {
@@ -33,8 +34,11 @@ void setup ()
     rectanglePosition[i].x = 350;
     rectanglePosition[i].y = 350;
     CurrentPosition [i] = new PVector (350,350);
+    distanceBehind = new PVector (15,0);
+    circlePosition = new PVector (random(width), random(height));
   }
-  
+
+  rectanglePosition[1] = rectanglePosition[1].sub(distanceBehind);
 
 /*  
   rectanglePosition [0] = new PVector (350,350);
@@ -83,7 +87,9 @@ void setup ()
 }
 
 void draw()
-{
+{  
+  
+  
   for(int i=0; i<20; i++)
   {
     Boundaries ();
@@ -94,7 +100,7 @@ void draw()
   
     if(x2 == true)
     {
-      rectanglePosition[i].x = rectanglePosition[i].y - 3;
+      rectanglePosition[i].x = rectanglePosition[i].x - 3;
     }
   
     if(y1 == true)
@@ -114,6 +120,9 @@ void draw()
   {
     rect(rectanglePosition[i].x, rectanglePosition[i].y, size, size);
   }
+  
+  fill(20,130,200);
+  rect(rectanglePosition[0].x, rectanglePosition[0].y, size, size);
   
   if(keyPressed)
   {

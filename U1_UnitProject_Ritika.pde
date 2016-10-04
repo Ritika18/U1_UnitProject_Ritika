@@ -10,73 +10,169 @@ whatever I want to write
 */
 
 float currentRectShowing = 1;
-float xCurrentPosition [];
-float yCurrentPosition [];
-float xRectangle [];
-float yRectangle [];
 float rectangles [];
 float size = 15;
+
+PVector[] CurrentPosition = new PVector [20];
+PVector[] rectanglePosition = new PVector [20];
+
+boolean x1 = false;
+boolean x2 = false;
+boolean y1 = false;
+boolean y2 = false;
+
 
 void setup ()
 {
   size(700,700);
+   
   
-  xCurrentPosition = new float [20];
-  yCurrentPosition = new float [20];
-  xRectangle = new float [20];
-  yRectangle = new float [20]; 
+  for(int i = 0; i < 20; i++)
+  {
+    rectanglePosition [i] = new PVector (350,350);
+    rectanglePosition[i].x = 350;
+    rectanglePosition[i].y = 350;
+    CurrentPosition [i] = new PVector (350,350);
+  }
   
-  xRectangle [0] = 350;
-  yRectangle [0] = 350; 
-  xRectangle [1] = 335;
-  yRectangle [1] = 350; 
-  xRectangle [2] = xCurrentPosition [1];
-  yRectangle [2] = yCurrentPosition [1]; 
-  xRectangle [3] = xCurrentPosition [2];
-  yRectangle [3] = yCurrentPosition [2]; 
+
+/*  
+  rectanglePosition [0] = new PVector (350,350);
+
+  rectanglePosition [1] = CurrentPosition [0];
+  rectanglePosition [2] = CurrentPosition [1];
+  rectanglePosition [3] = CurrentPosition [2];
+  rectanglePosition [4] = CurrentPosition [3];
+  rectanglePosition [5] = CurrentPosition [4];
+  rectanglePosition [6] = CurrentPosition [5];
+  rectanglePosition [7] = CurrentPosition [6];  
+  rectanglePosition [8] = CurrentPosition [7];
+  rectanglePosition [9] = CurrentPosition [8];
+  rectanglePosition [10] = CurrentPosition [9];
+  rectanglePosition [11] = CurrentPosition [10]; 
+  rectanglePosition [12] = CurrentPosition [11];
+  rectanglePosition [13] = CurrentPosition [12];
+  rectanglePosition [14] = CurrentPosition [13];
+  rectanglePosition [15] = CurrentPosition [14];
+  rectanglePosition [16] = CurrentPosition [15];
+  rectanglePosition [17] = CurrentPosition [16];
+  rectanglePosition [18] = CurrentPosition [17];
+  rectanglePosition [19] = CurrentPosition [18];
   
-  xCurrentPosition [0] = xRectangle [0] - 15;
-  yCurrentPosition [0] = yRectangle [0] - 15;
-  xCurrentPosition [1] = xRectangle [1] - 15;
-  yCurrentPosition [1] = yRectangle [1] - 15;
-  xCurrentPosition [2] = xRectangle [2] - 15;
-  yCurrentPosition [2] = yRectangle [2] - 15;
-  xCurrentPosition [3] = xRectangle [3] - 15;
-  yCurrentPosition [3] = yRectangle [3] - 15;
+  CurrentPosition [0] = rectanglePosition [0];
+  CurrentPosition [1] = rectanglePosition [1];
+  CurrentPosition [2] = rectanglePosition [2];
+  CurrentPosition [3] = rectanglePosition [3];
+  CurrentPosition [4] = rectanglePosition [4];
+  CurrentPosition [5] = rectanglePosition [5];
+  CurrentPosition [6] = rectanglePosition [6];
+  CurrentPosition [7] = rectanglePosition [7];
+  CurrentPosition [8] = rectanglePosition [8];
+  CurrentPosition [9] = rectanglePosition [9];
+  CurrentPosition [10] = rectanglePosition [10];
+  CurrentPosition [11] = rectanglePosition [11];
+  CurrentPosition [12] = rectanglePosition [12];
+  CurrentPosition [13] = rectanglePosition [13];
+  CurrentPosition [14] = rectanglePosition [14];
+  CurrentPosition [15] = rectanglePosition [15];
+  CurrentPosition [16] = rectanglePosition [16];
+  CurrentPosition [17] = rectanglePosition [17];
+  CurrentPosition [18] = rectanglePosition [18];
+  CurrentPosition [19] = rectanglePosition [19];
+*/
 }
 
 void draw()
 {
+  for(int i=0; i<20; i++)
+  {
+    Boundaries ();
+    if(x1 == true)
+    {
+      rectanglePosition[i].x = rectanglePosition[i].x + 3;
+    }
+  
+    if(x2 == true)
+    {
+      rectanglePosition[i].x = rectanglePosition[i].y - 3;
+    }
+  
+    if(y1 == true)
+    {
+      rectanglePosition[i].y = rectanglePosition[i].y + 3;
+    }
+  
+    if(y2 == true)
+    {
+      rectanglePosition[i].y = rectanglePosition[i].y - 3;
+    }
+  }  
   background(0);
   fill(255);
   
   for(int i = 0; i<20; i++)
   {
-    rect(xRectangle[i], yRectangle [i], size, size);
+    rect(rectanglePosition[i].x, rectanglePosition[i].y, size, size);
   }
   
   if(keyPressed)
   {
     if(key == 'd')
     {
-      xRectangle[0] = xRectangle[0] + 1;
+      x1 = true;
+      x2 = false;
+      y1 = false;
+      y2 = false;
     }
     
     if(key == 's')
     {
-      yRectangle[0] = yRectangle[0] + 1;
+      x1 = false;
+      x2 = false;
+      y1 = true;
+      y2 = false;
     }
 
     if(key == 'a')
     {
-      xRectangle[0] = xRectangle[0] - 1;
+      x1 = false;
+      x2 = true;
+      y1 = false;
+      y2 = false;
     }
     
     if(key == 'w')
     {
-      yRectangle[0] = yRectangle[0] - 1;
+      x1 = false;
+      x2 = false;
+      y1 = false;
+      y2 = true;
     }
   }
+}
 
+void Boundaries ()
+{
+  for(int i = 0; i<20; i++)
+  {
+    if(rectanglePosition[i].x > width)
+    {
+      rectanglePosition[i].x = 0;
+    }
 
+    if(rectanglePosition[i].x < 0)
+    {
+      rectanglePosition[i].x = width;
+    }
+    
+    if(rectanglePosition[i].y > height)
+    {
+      rectanglePosition[i].y = 0;
+    }
+    
+    if(rectanglePosition[i].y < 0)
+    {
+      rectanglePosition[i].y = height;
+    }
+  }
 }

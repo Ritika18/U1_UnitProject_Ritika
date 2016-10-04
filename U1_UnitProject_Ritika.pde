@@ -1,23 +1,30 @@
 /*
 
-<h2> Description </h2>
-<p> whatever I want to write <p>
-<h2> Inspiration </h2>
-whatever I want to write
-<h2> Screenshots </h2>
-<img src = "link to the vid"
+Name: Blizzard Snake
+
+Description: This game is a variation of the snake game. Similar to the snake game, the
+object here is to collect the red circles with only the blue square. Every time you
+collect a circle, it adds another square to the blizzard making it more and more 
+difficult to effectively capture the red circles. The game uses the following keys = 
+'a', 's', 'd', and 'w'. Let, down, right, and up respectively.
 
 */
 
+//float which describes how many rects are visible
 float currentRectangles = 1;
-float rectangles [];
+//the size of the rects and circles
 float size = 15;
 
+//The current position of the rects
 PVector[] CurrentPosition = new PVector [20];
+//the rectangles placement
 PVector[] rectanglePosition = new PVector [20];
+//how much farther before the first circle they need to be
 PVector[] distanceBehind = new PVector [20];
+//the circles position
 PVector circlePosition;
 
+//booleans regarding direction. x1 and y1 = positive   x2 and y2 = negative
 boolean x1 = false;
 boolean x2 = false;
 boolean y1 = false;
@@ -28,12 +35,16 @@ void setup ()
 {
   size(700,700);
   
+  //for loop assigning the variables
   for(int i = 0; i < currentRectangles; i++)
   {
-    rectanglePosition [i] = new PVector (350,350);
-    rectanglePosition[i].x = 350;
-    rectanglePosition[i].y = 350;
+    //where rectanglePosition [0] appears
+    rectanglePosition [0] = new PVector (350,350);
+    
+    //making all of them appear in the center of the screen
     CurrentPosition [i] = new PVector (350,350);
+    
+    //how far behind rectanglePosition[0] everything is
     distanceBehind [0] = new PVector (15,0);
     distanceBehind [1] = new PVector (30,0);
     distanceBehind [2] = new PVector (45,0);
@@ -54,9 +65,12 @@ void setup ()
     distanceBehind [17] = new PVector (270,0);
     distanceBehind [18] = new PVector (285,0);
     distanceBehind [19] = new PVector (300,0);
+    
+    //randomizing the location of the circle
     circlePosition = new PVector (random(width), random(height));
   }
   
+  //Govomg them of the rects a values / locations
   rectanglePosition[1] = new PVector (350,350);
   rectanglePosition[2] = new PVector (350,350);
   rectanglePosition[3] = new PVector (350,350);
@@ -76,6 +90,8 @@ void setup ()
   rectanglePosition[17] = new PVector (350,350);
   rectanglePosition[18] = new PVector (350,350);
   rectanglePosition[19] = new PVector (350,350);
+  
+  //saying that the rects should be -- behind rectanglePosition [0]
   rectanglePosition[1] = rectanglePosition[1].sub(distanceBehind[0]);
   rectanglePosition[2] = rectanglePosition[2].sub(distanceBehind[1]);
   rectanglePosition[3] = rectanglePosition[3].sub(distanceBehind[2]);
@@ -101,40 +117,52 @@ void draw()
 {    
   for(int i=0; i<currentRectangles; i++)
   {
+    //creating a new void
     Boundaries ();
+    
+    //direction - when x1 = true, increase the x speed
     if(x1 == true)
     {
       rectanglePosition[i].x = rectanglePosition[i].x + 10;
     }
-  
+
+    //direction - when x2 = true, decrease the x speed
     if(x2 == true)
     {
       rectanglePosition[i].x = rectanglePosition[i].x - 10;
     }
-  
+
+    //direction - when y1 = true, increase the y speed
     if(y1 == true)
     {
       rectanglePosition[i].y = rectanglePosition[i].y + 10;
     }
-  
+    
+    //direction - when y2 = true, decrease the y speed
     if(y2 == true)
     {
       rectanglePosition[i].y = rectanglePosition[i].y - 10;
     }
   }  
+  
+  //colors
   background(0);
   fill(255);
   
+  //Drawing all 20 rects
   for(int i = 0; i<currentRectangles; i++)
   {
     rect(rectanglePosition[i].x, rectanglePosition[i].y, size, size);
   }
   
+  //Special rectanglePosition[0] = gets a different color
   fill(20,130,200);
   rect(rectanglePosition[0].x, rectanglePosition[0].y, size, size);
   
+  //movement connected to the keys
   if(keyPressed)
   {
+    //move right at a constant speed - Once 'd' is clicked constantly move right
     if(key == 'd')
     {
       x1 = true;
@@ -142,7 +170,8 @@ void draw()
       y1 = false;
       y2 = false;
     }
-    
+
+    //move down at a constant speed - Once 's' is clicked constantly move down
     if(key == 's')
     {
       x1 = false;
@@ -151,6 +180,7 @@ void draw()
       y2 = false;
     }
 
+    //move left at a constant speed - Once 'a' is clicked constantly move left
     if(key == 'a')
     {
       x1 = false;
@@ -158,7 +188,8 @@ void draw()
       y1 = false;
       y2 = false;
     }
-    
+
+    //move up at a constant speed - Once 'w' is clicked constantly move up
     if(key == 'w')
     {
       x1 = false;
@@ -168,36 +199,44 @@ void draw()
     }
   }
   
+  //draw the red circle
   fill(255,0,0);
   ellipse(circlePosition.x,circlePosition.y,size,size);
   
+  //if the circle and first rect collide
   if(dist (circlePosition.x, circlePosition.y, rectanglePosition[0].x, rectanglePosition[0].y) < 25)
   {
+    //circle gets a new random location and there is 1 more rectangle showing
     circlePosition.x = random(width);
     circlePosition.y = random(height);
     currentRectangles++;
   }
 }
 
+//void for the boundaries of the rects
 void Boundaries ()
 {
   for(int i = 0; i < currentRectangles; i++)
   {
+    //telling it to reappear at the left, if it goes off the screen to the right
     if(rectanglePosition[i].x > width)
     {
       rectanglePosition[i].x = 0;
     }
 
+    //telling it to reappear at the right, if it goes off the screen to the left
     if(rectanglePosition[i].x < 0)
     {
       rectanglePosition[i].x = width;
     }
-    
+
+    //telling it to reappear at the top, if it goes off the screen to the bottom
     if(rectanglePosition[i].y > height)
     {
       rectanglePosition[i].y = 0;
     }
-    
+
+    //telling it to reappear at the bottom, if it goes off the screen to the top
     if(rectanglePosition[i].y < 0)
     {
       rectanglePosition[i].y = height;

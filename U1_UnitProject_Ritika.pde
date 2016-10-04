@@ -87,30 +87,28 @@ void setup ()
 }
 
 void draw()
-{  
-  
-  
+{    
   for(int i=0; i<20; i++)
   {
     Boundaries ();
     if(x1 == true)
     {
-      rectanglePosition[i].x = rectanglePosition[i].x + 3;
+      rectanglePosition[i].x = rectanglePosition[i].x + 10;
     }
   
     if(x2 == true)
     {
-      rectanglePosition[i].x = rectanglePosition[i].x - 3;
+      rectanglePosition[i].x = rectanglePosition[i].x - 10;
     }
   
     if(y1 == true)
     {
-      rectanglePosition[i].y = rectanglePosition[i].y + 3;
+      rectanglePosition[i].y = rectanglePosition[i].y + 10;
     }
   
     if(y2 == true)
     {
-      rectanglePosition[i].y = rectanglePosition[i].y - 3;
+      rectanglePosition[i].y = rectanglePosition[i].y - 10;
     }
   }  
   background(0);
@@ -157,6 +155,15 @@ void draw()
       y1 = false;
       y2 = true;
     }
+  }
+  
+  fill(255,0,0);
+  ellipse(circlePosition.x,circlePosition.y,size,size);
+  
+  if(dist (circlePosition.x, circlePosition.y, rectanglePosition[0].x, rectanglePosition[0].y) < 25)
+  {
+    circlePosition.x = random(width);
+    circlePosition.y = random(height);
   }
 }
 

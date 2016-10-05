@@ -1,4 +1,4 @@
-<h1>Name: The Blizzard Snake</h1>
+<h1>The Blizzard Snake</h1>
 
 <h1>By: Ritika Kacholia</h1>
 
